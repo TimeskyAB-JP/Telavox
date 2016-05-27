@@ -62,9 +62,9 @@ def call_history_loop(call_type):
 	nb_calls = len(tvxapi_call_type_json)
 	for i in range(nb_calls):
 		print('Call %s %s on %s - lasted %d seconds' % (call_status[call_type],
-														tvxapi_call_type_json[i]['number'].encode('utf-8'),
-														tvxapi_call_type_json[i]['datetime'].encode('utf-8'),
-														tvxapi_call_type_json[i]['duration']))
+								tvxapi_call_type_json[i]['number'].encode('utf-8'),
+								tvxapi_call_type_json[i]['datetime'].encode('utf-8'),
+								tvxapi_call_type_json[i]['duration']))
 		total_duration += tvxapi_call_type_json[i]['duration']
 	
 	average_duration = total_duration / nb_calls
