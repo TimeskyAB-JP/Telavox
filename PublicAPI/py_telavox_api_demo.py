@@ -73,9 +73,9 @@ def call_history_loop(call_type):
 		print('Average %s call duration: %d seconds.' % (call_type, average_duration))
 
 ## Main function
-def main_loop(target_url):
+def main_loop():
 	# Authenticate #
-	tvxapi_auth_get = mech_wb.open(target_url)
+	tvxapi_auth_get = mech_wb.open(tvxapi_auth_url)
 	tvxapi_auth_json = json.load(tvxapi_auth_get)
 
 	# Check authentication success according to Telavox documentation
@@ -93,6 +93,8 @@ def main_loop(target_url):
 
 	print('Press any key to quit.')
 	raw_input()
+	mech_wb.open(tvxapi_logout_url)
+	
 
 
 #**** pip imports ****#
@@ -118,11 +120,12 @@ mech_wb = mechanize.Browser()
 base_url = 'https://api.telavox.se/'
 tvxapi_auth_url = base_url + 'auth/login?username=' + tvx_username + '&password=' + tvx_pw
 tvxapi_call_url = base_url + 'calls'
+tvxapi_logout_url = base_url + 'auth/logout'
 
 #**** Getting started ****#
 if __name__ == '__main__':
 	try:
-		main_loop(tvxapi_auth_url)
+		main_loop()
 	except mechanize.HTTPError as err_msg:
 		print('Server returned: %s' % err_msg)
 	
